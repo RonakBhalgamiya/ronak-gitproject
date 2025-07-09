@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Card Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Card Battle Game 🔥</h1>
+  <div id="game">
+    <div class="player">
+      <h2>Player 1</h2>
+      <div id="player1-card" class="card">?</div>
+    </div>
+
+    <div class="vs">VS</div>
+
+    <div class="player">
+      <h2>Player 2</h2>
+      <div id="player2-card" class="card">?</div>
+    </div>
+  </div>
+
+  <button onclick="playRound()">Draw Cards</button>
+  <h3 id="result"></h3>
+
+  <script src="script.js"></script>
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #1e1e2f;
+  color: white;
+}
+
+#game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+}
+
+.player {
+  margin: 20px;
+}
+
+.card {
+  background: #fff;
+  color: #000;
+  width: 80px;
+  height: 120px;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  margin: auto;
+}
+
+.vs {
+  font-size: 30px;
+  margin: 0 20px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 30px;
+  font-size: 18px;
+  background-color: #ff4c60;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff1e40;
+}
+const cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]; // 11=J, 12=Q, 13=K, 14=A
+
+function drawCard() {
+  return cards[Math.floor(Math.random() * cards.length)];
+}
+
+function playRound() {
+  const card1 = drawCard();
+  const card2 = drawCard();
+
+  document.getElementById('player1-card').textContent = convertCard(card1);
+  document.getElementById('player2-card').textContent = convertCard(card2);
+
+  const result = document.getElementById('result');
+  if (card1 > card2) {
+    result.textContent = "Player 1 Wins! 🥳";
+  } else if (card2 > card1) {
+    result.textContent = "Player 2 Wins! 🔥";
+  } else {
+    result.textContent = "It's a Tie! 😮";
+  }
+}
+
+function convertCard(value) {
+  if (value === 11) return 'J';
+  if (value === 12) return 'Q';
+  if (value === 13) return 'K';
+  if (value === 14) return 'A';
+  return value;
+}
+</body>
+</html>
